@@ -1,3 +1,3 @@
-import lexer as l
+import sys,lexer
 f = open(sys.argv[1], "r", encoding="utf-8")
-l.lex(f.read())
+lexer.lex(f.read())
