@@ -45,53 +45,6 @@ class t:
         return self.tokenType
     def getTokenValue(self):
         return self.tokenValue
-class IntegerLiteral(collections.namedtuple('IntegerLiteral','value')):
-    def toDict(self):
-        return{'type':'IntegerLiteral','value':self.value}
-class UnaryOpExpression(collections.namedtuple('UnaryOpExpression',('op','value'))):
-    def toDict(self):
-        return{'type':'UnaryOpExpression','op':self.op,'value':self.value}
-class BinaryOpExpression(collections.namedtuple('BinaryOpExpression',('op','prefix','postfix'))):
-    def toDict(self):
-        return{'type':'BinaryOpExpression','op':self.op,'prefix':self.prefix,'postfix':self.postfix}
-print(BinaryOpExpression("+",IntegerLiteral(3),IntegerLiteral(3)))
-class Stack:
-    def __init__(self):
-        self.items=[]
-    def isEmpty(self):
-        return self.items==[]
-    def push(self, item):
-        self.items.append(item)
-    def peek(self):
-       return self.items[len(self.items)-1]
-    def pop(self):
-        return self.items.pop()
-    def size(self):
-        return len(self.items)
-class CycleStack:
-    def __init__(self,items):
-        self.items=list(items)
-        self.cursor=0
-        self.cursorStack=[]
-    def isEmpty(self):
-        return self.items==[]
-    def push(self, item):
-        self.items.append(item)
-    def peek(self):
-       try:
-           return self.items[selfCursor]
-       except IndexError:
-           print("unexpected end of input")
-    def pop(self):
-        rv=self.peek()
-        self.cursor++
-        return rv
-    def pushCursor(self):
-        self.cursorStack.append(self.cursor)
-    def popCursor(self):
-        self.cursor=self.cursorStack.pop()
-    def size(self):
-        return len(self.items)
 def lex(string):
     token=""
     tokenClass=0
