@@ -15,11 +15,6 @@ import io,collections;
 #   0: Regular
 #   1: String
 #
-operatorTokens=frozenset("=><+-/*!%&|");
-abcTokens=frozenset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-abcNTokens=frozenset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
-nTokens=frozenset("1234567890")
-sTokens=frozenset("(){},")
 def tokenTypeToName(tokenType):
     rv=""
     if(tokenType==0):
@@ -46,6 +41,11 @@ class t:
     def getTokenValue(self):
         return self.tokenValue
 def lex(string):
+    operatorTokens=frozenset("=><+-/*!%&|");
+    abcTokens=frozenset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    abcNTokens=frozenset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
+    nTokens=frozenset("1234567890")
+    sTokens=frozenset("(){},")
     token=""
     tokenClass=0
     tokenModifier=0
