@@ -1,3 +1,4 @@
-import sys,lexer
+import sys,lexer,tokens
 f = open(sys.argv[1], "r", encoding="utf-8")
-lexer.lex(f.read())
+for o in lexer.lex(f.read()):
+	print(o.toDict())

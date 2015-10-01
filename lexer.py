@@ -1,4 +1,4 @@
-import io,collections;
+import io,collections,tokens
 #   Token Class Guide
 #
 #   0: None
@@ -30,16 +30,6 @@ def tokenTypeToName(tokenType):
     elif(tokenType==5):
         rv="[string]"
     return rv;
-class t:
-    tokenType=0
-    tokenValue=""
-    def __init__(self,tokenType,tokenValue):
-        self.tokenType=tokenType
-        self.tokenValue=tokenValue
-    def getTokenType(self):
-        return self.tokenType
-    def getTokenValue(self):
-        return self.tokenValue
 def lex(string):
     operatorTokens=frozenset("=><+-/*!%&|");
     abcTokens=frozenset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -50,7 +40,7 @@ def lex(string):
     tokenClass=0
     tokenModifier=0
     readMode=0
-    tokens=[]
+    tokenArray=[]
     for i in range(0,len(string)):
         if(readMode==0):
             if(tokenClass!=0):
@@ -58,19 +48,19 @@ def lex(string):
                     if(string[i] in operatorTokens):
                         token+=string[i]
                     else:
-                        tokens.append(t(tokenClass,token))
+                        tokenArray.append(tokens.Token(tokenClass,token))
                         tokenClass=0
                 elif(tokenClass==2):
                     if(string[i] in abcNTokens):
                         token+=string[i]
                     else:
-                        tokens.append(t(tokenClass,token))
+                        tokenArray.append(tokens.Token(tokenClass,token))
                         tokenClass=0
                 elif(tokenClass==3):
                     if(string[i] in nTokens):
                         token+=string[i]
                     else:
-                        tokens.append(t(tokenClass,token))
+                        tokenArray.append(tokens.Token(tokenClass,token))
                         tokenClass=0
             if(tokenClass==0):
                 token="";
@@ -84,7 +74,7 @@ def lex(string):
                     token+=string[i]
                     tokenClass=3
                 elif(string[i] in sTokens):
-                    tokens.append(t(4,string[i]))
+                    tokenArray.append(tokens.Token(4,string[i]))
                 elif(string[i]=="\""):
                     tokenClass=5
                     tokenModifier=1
@@ -95,13 +85,13 @@ def lex(string):
                     readMode=1
         elif(readMode==1):
             if(string[i]=="\""and tokenModifier==1):
-                tokens.append(t(tokenClass,token))
+                tokenArray.append(tokens.Token(tokenClass,token))
                 tokenClass=0
                 readMode=0
             elif(string[i]=="'"and tokenModifier==0):
-                tokens.append(t(tokenClass,token))
+                tokenArray.append(tokens.Token(tokenClass,token))
                 tokenClass=0
                 readMode=0
             else:
                 token+=string[i]
-    return tokens;
+    return tokenArray;
